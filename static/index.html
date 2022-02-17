@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Webview Example</title>
+  </head>
+  <body>
+    <h2>Boom !</h2>
+    <button onclick="boom()">boom</button><br />
+    <h2>Get String</h2>
+    <button onclick="updateString()" id="get-string">getString</button><br />
+    <h2>Get Complex Data</h2>
+    <p id="name">Name</p>
+    <p id="age">Age</p>
+    <ul id="list"></ul>
+    <button onclick="updateComplexData()">getComplexData</button><br />
+    <h2>File List!</h2>
+    <ul id="file-list"></ul>
+    <button onclick="updateFileList()">Update Data</button><br />
+    <h2>Get From Database</h2>
+    <ul id="database-list"></ul>
+    <button onclick="updateDatabaseList()">Update Data</button><br />
+    <h2>Save To Database</h2>
+    <form>
+      <label for="fname">First name:</label>
+      <input type="text" id="fname" name="fname" /><br />
+      <label for="lname">Last name:</label>
+      <input type="text" id="lname" name="lname" /><br />
+    </form>
+    <button onclick="saveToDatabase()">Save</button><br />
+    <button onclick="quit()">Quit</button>
+  </body>
+  <script type="text/javascript">
+    function boom() {
+      goLog("BOOM !");
+    }
+    function updateString() {
+      getString().then(function (res) {
+        document.getElementById("get-string").innerHTML = res;
+      });
+    }
+    function updateComplexData() {
+      getComplexData().then(function (res) {
+        document.getElementById("name").innerHTML = res.user.name;
+        document.getElementById("age").innerHTML = res.user.age;
+        var ul = document.getElementById("list");
+        for (var i = 0; i < res.data.length; i++) {
+          var li = document.createElement("li");
+          li.innerHTML = res.data[i];
+          ul.appendChild(li);
+        }
+      });
+    }
+    function updateFileList() {
+      getFileList().then(function (res) {
+        var ul = document.getElementById("file-list");
+        for (var i = 0; i < res.length; i++) {
+          data = res[i];
+          // go slice contains empty string, so we need to check it
+          if (data === "") {
+            continue;
+          }
+          var li = document.createElement("li");
+          li.appendChild(document.createTextNode(data));
+          ul.appendChild(li);
+        }
+      });
+    }
+    function updateDatabaseList() {
+      getAllName().then(function (res) {
+        var ul = document.getElementById("database-list");
+        // clear list
+        while (ul.firstChild) {
+          ul.removeChild(ul.firstChild);
+        }
+        for (var i = 0; i < res.length; i++) {
+          data = res[i];
+          // go slice contain empty value, so we need to check it
+          if (data == null) {
+            continue;
+          }
+          id = data.id;
+          firstName = data.first_name;
+          lastName = data.last_name;
+          var li = document.createElement("li");
+          li.appendChild(document.createTextNode(id + " " + firstName + " " + lastName));
+          ul.appendChild(li);
+        }
+      });
+    }
+    function saveToDatabase() {
+      var fname = document.getElementById("fname").value;
+      var lname = document.getElementById("lname").value;
+      insertName(fname, lname).then(function (res) {
+        goLog("Inserted " + res);
+        updateDatabaseList();
+      });
+    }
+  </script>
+</html>
