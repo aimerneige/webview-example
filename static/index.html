@@ -28,7 +28,11 @@
       <input type="text" id="lname" name="lname" /><br />
     </form>
     <button onclick="saveToDatabase()">Save</button><br />
-    <button onclick="quit()">Quit</button>
+    <button onclick="quit()">Quit</button><br />
+    <img id="url-image" alt="Url Image" width="380" height="380"/>
+    <button onclick="updateImage()">Update Url Image</button><br />
+    <img id="local-image" alt="Local Image" width="380" height="380"/>
+    <button onclick="updateLocalImage()">Update Local Image</button><br />
   </body>
   <script type="text/javascript">
     function boom() {
@@ -94,6 +98,16 @@
       insertName(fname, lname).then(function (res) {
         goLog("Inserted " + res);
         updateDatabaseList();
+      });
+    }
+    function updateImage() {
+      getUrlImage().then(function (res) {
+        document.getElementById("url-image").src = res;
+      });
+    }
+    function updateLocalImage() {
+      getLocalImage().then(function (res) {
+        document.getElementById("local-image").src = res;
       });
     }
   </script>

@@ -10,5 +10,7 @@ func StartWebServer(port string) {
 		c.HTML(200, "index.html", nil)
 	})
 
+	r.Static("/img", "./static/img")
+
 	panic(r.Run(port))
 }
