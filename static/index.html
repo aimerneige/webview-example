@@ -34,6 +34,7 @@
     <img id="local-image" alt="Local Image" width="380" height="380"/>
     <button onclick="updateLocalImage()">Update Local Image</button><br />
     <button onclick="changePage()">Change Page</button><br />
+    <button onclick="showImageWindow()">Open Image Window</button><br />
   </body>
   <script type="text/javascript">
     function boom() {
@@ -113,6 +114,9 @@
     }
     function changePage() {
       changeNavigate("http://localhost:8080/multi/");
+    }
+    function showImageWindow() {
+      showImageViewer("img/gophercolor.png", "Gopher");
     }
   </script>
 </html>
