@@ -33,6 +33,7 @@
     <button onclick="updateImage()">Update Url Image</button><br />
     <img id="local-image" alt="Local Image" width="380" height="380"/>
     <button onclick="updateLocalImage()">Update Local Image</button><br />
+    <button onclick="changePage()">Change Page</button><br />
   </body>
   <script type="text/javascript">
     function boom() {
@@ -109,6 +110,9 @@
       getLocalImage().then(function (res) {
         document.getElementById("local-image").src = res;
       });
+    }
+    function changePage() {
+      changeNavigate("http://localhost:8080/multi/");
     }
   </script>
 </html>

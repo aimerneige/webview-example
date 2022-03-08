@@ -12,5 +12,6 @@ func AllBindCollection(w webview.WebView) {
 	w.Bind("insertName", InsertBind())
 	w.Bind("getUrlImage", UrlImageBind())
 	w.Bind("getLocalImage", LocalImageBind())
+	w.Bind("changeNavigate", ChangeNavigateBind(w))
 	w.Bind("quit", QuitBind(w))
 }
