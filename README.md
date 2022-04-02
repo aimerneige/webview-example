@@ -6,6 +6,8 @@ One simple example for [webview](https://github.com/webview/webview).
 
 I am not familiar with html, so it may be a bad code for that. Just take it as a simple example.
 
+And also, this repo's structure of go project is not recommend to learn.
+
 ## Build
 
 First, you need to edit a config file for mysql database. Just like the `config/config.example.yml`, put it into `config/config.yml`.
